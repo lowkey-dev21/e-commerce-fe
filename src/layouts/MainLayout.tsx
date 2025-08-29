@@ -8,9 +8,6 @@ const MainLayout = () => {
       <main>
         <Outlet />
       </main>
-      <footer>
-        <p>Footer</p>
-      </footer>
     </ScreenWrapper>
   );
 };
