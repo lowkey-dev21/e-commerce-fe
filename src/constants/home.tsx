@@ -9,8 +9,8 @@ export const NAVLINKS: Navlinks[] = [
     link: "/",
   },
   {
-    name: "New",
-    link: "/new",
+    name: "Products",
+    link: "/products",
   },
   {
     name: "Collections",
@@ -115,7 +115,7 @@ export const SVGS = {
     >
       <path
         fill="currentColor"
-        fill-rule="evenodd"
+        fillRule="evenodd"
         d="m16.31 15.561l4.114 4.115l-.848.848l-4.123-4.123a7 7 0 1 1 .857-.84M16.8 11a5.8 5.8 0 1 0-11.6 0a5.8 5.8 0 0 0 11.6 0"
       />
     </svg>
@@ -131,9 +131,28 @@ export const SVGS = {
       <path
         fill="none"
         stroke="currentColor"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="1.5"
+        d="M.75 12h22.5m-10.5 10.5L23.25 12L12.75 1.5"
+      />
+    </svg>
+  ),
+
+  arrowBack: (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      className="rotate-180"
+    >
+      <path
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="1.5"
         d="M.75 12h22.5m-10.5 10.5L23.25 12L12.75 1.5"
       />
     </svg>
@@ -149,9 +168,9 @@ export const SVGS = {
       <path
         fill="none"
         stroke="currentColor"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
         d="m15 6l-6 6l6 6"
       />
     </svg>
@@ -167,9 +186,9 @@ export const SVGS = {
       <path
         fill="none"
         stroke="currentColor"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
         d="m9 6l6 6l-6 6"
       />
     </svg>

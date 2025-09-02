@@ -1,18 +1,20 @@
+import React from "react";
 import { cn } from "../../lib/utils";
-interface ButtonI {
-  text: string | any;
-  rightIcon?: any;
-  leftIcon?: any;
+
+interface ButtonProps {
+  text: string;
+  rightIcon?: React.ReactNode;
+  leftIcon?: React.ReactNode;
   className?: string;
-  action?: () => {};
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-const Button = ({ text, rightIcon, leftIcon, className, action }: ButtonI) => {
+const Button = ({ text, rightIcon, leftIcon, className, onClick }: ButtonProps) => {
   return (
     <button
-      onClick={action}
+      onClick={onClick}
       className={cn(
-        "  bg-[#d4d4d4] h-[40px] hover:bg-[#d4d4d4]/70 flex items-center p-6 justify-between",
+        "  bg-[#d4d4d4] h-[40px] hover:shadow-2xl flex items-center p-6 justify-between",
         className
       )}
     >

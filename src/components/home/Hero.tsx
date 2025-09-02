@@ -98,9 +98,10 @@ const Hero = () => {
           {products.map(product => (
             <ProductCard
               key={product.id}
+              id={parseInt(product.id)}
               type={product.type}
               name={product.name}
-              price={product.price}
+              price={parseInt(product.price.replace('$', ''))}
               image={product.image}
               imageStyle="w-[400px] "
               className="w-[300px] shrink-0"

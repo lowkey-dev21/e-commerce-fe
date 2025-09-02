@@ -74,7 +74,7 @@ function Collections() {
       image: Product5,
       quantity: 1,
       category: "Women",
-      id: "1",
+      id: "5",
     },
     {
       name: "Basic SLime FIt T-Shirt",
@@ -84,12 +84,12 @@ function Collections() {
       quantity: 5,
       color: "#A3A3A3",
       category: "Kid",
-      id: "2",
+      id: "6",
     },
     {
       name: "Basic Print FIt T-Shirt",
       type: "Henley T-Shirt",
-      id: "3",
+      id: "7",
       price: "$40",
       image: Product7,
       quantity: 3,
@@ -99,7 +99,7 @@ function Collections() {
     {
       name: "Full Sleeve Zipper",
       type: "Crewneck T-Shirt",
-      id: "4",
+      id: "8",
       price: "$40",
       image: Product8,
       quantity: 5,
@@ -143,15 +143,15 @@ function Collections() {
           {products.map(product => (
             <ProductCard
               key={product.id}
+              id={parseInt(product.id)}
               type={product.type}
               name={product.name}
-              price={product.price}
+              price={parseInt(product.price.replace('$', ''))}
               image={product.image}
               quantity={product.quantity}
               color={product.color}
               imageStyle="w-[400px] md:w-[600px] "
               className="w-[300px] md:w-[400px] shrink-0"
-              addToCart
             />
           ))}
         </div>
@@ -165,15 +165,15 @@ function Collections() {
             .map(product => (
               <ProductCard
                 key={product.id}
+                id={parseInt(product.id)}
                 type={product.type}
                 name={product.name}
-                price={product.price}
+                price={parseInt(product.price.replace('$', ''))}
                 image={product.image}
                 quantity={product.quantity}
                 color={product.color}
                 imageStyle="w-[400px] md:w-[600px] "
                 className="w-[300px] md:w-[400px] shrink-0"
-                addToCart
               />
             ))}
         </div>
@@ -187,9 +187,10 @@ function Collections() {
             .map(product => (
               <ProductCard
                 key={product.id}
+                id={parseInt(product.id)}
                 type={product.type}
                 name={product.name}
-                price={product.price}
+                price={parseInt(product.price.replace('$', ''))}
                 image={product.image}
                 quantity={product.quantity}
                 color={product.color}
@@ -209,9 +210,10 @@ function Collections() {
             .map(product => (
               <ProductCard
                 key={product.id}
+                id={parseInt(product.id)}
                 type={product.type}
                 name={product.name}
-                price={product.price}
+                price={parseInt(product.price.replace('$', ''))}
                 image={product.image}
                 quantity={product.quantity}
                 color={product.color}

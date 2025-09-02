@@ -1,18 +1,22 @@
 import { cn } from "../../lib/utils";
 import Button from "./Button";
+import { useCart } from "../../contexts/CartContext";
+import { useState } from "react";
+
 interface ProductI {
   image?: string;
   imageStyle?: string;
   type?: string;
   description?: string;
   action?: () => void;
-  id?: string;
+  id?: number;
   className?: string;
-  price?: string;
+  price?: number;
   quantity?: number;
   color?: string;
   name?: string;
   addToCart?: boolean;
+  subtitle?: string;
 }
 
 export default function ProductCard({
@@ -27,10 +31,30 @@ export default function ProductCard({
   addToCart,
   quantity = 1,
   color,
+  subtitle,
 }: ProductI) {
+  const { addItem } = useCart();
+  const [selectedSize, setSelectedSize] = useState('L');
+  const [selectedColor, setSelectedColor] = useState(color || 'Black');
+
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (id && name && price && image) {
+      addItem({
+        id,
+        name,
+        subtitle: subtitle || type || '',
+        price,
+        image,
+        size: selectedSize,
+        color: selectedColor,
+      });
+    }
+  };
+
   return (
     <div onClick={action} className={cn(" flex flex-col ", className)}>
-      <img src={image} alt={id} className={imageStyle} />
+      <img src={image} alt={name} className={imageStyle} />
       <div>
         <div className=" flex w-full  -mb-5 mt-3 items-center gap-2">
           <small className="text-[#272727]/70">{type}</small>
@@ -47,7 +71,7 @@ export default function ProductCard({
         <br />
         <div className="w-full text-xl font-medium flex items-center justify-between">
           <h1>{name}</h1>
-          <h1>{price}</h1>
+          <h1>${price}</h1>
         </div>
       </div>
 
@@ -55,6 +79,7 @@ export default function ProductCard({
         <Button
           text={"Add to Cart"}
           className=" flex items-center justify-center mt-4 bg-[#272727] text-[#ebebeb]"
+          onClick={handleAddToCart}
         />
       )}
     </div>

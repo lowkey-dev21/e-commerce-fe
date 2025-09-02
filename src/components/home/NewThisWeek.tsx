@@ -69,13 +69,14 @@ const NewThisWeek = () => {
       </div>
 
       <div className=" flex flex-col items-center mb-6 ">
-        <div className="flex w-full  gap-3 pb-6 overflow-x-auto">
+        <div className="flex w-full   gap-3 pb-6 overflow-x-auto">
           {products.map(product => (
             <ProductCard
               key={product.id}
+              id={parseInt(product.id)}
               type={product.type}
               name={product.name}
-              price={product.price}
+              price={parseInt(product.price.replace('$', ''))}
               image={product.image}
               quantity={product.quantity}
               color={product.color}
@@ -87,11 +88,13 @@ const NewThisWeek = () => {
 
         <div className="items-center gap-2 mt-4 hidden md:flex">
           <Button
-            text={SVGS.backward}
+            text=""
+            leftIcon={SVGS.backward}
             className="bg-[#ebebeb] border h-[20px] w-[60px] items-center justify-center "
           />
           <Button
-            text={SVGS.forward}
+            text=""
+            leftIcon={SVGS.forward}
             className="bg-[#ebebeb] border  h-[20px] w-[60px] flex items-center justify-center"
           />
         </div>
