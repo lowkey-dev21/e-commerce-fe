@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Button from "../../components/ui/Button";
 import { useCart } from "../../contexts/CartContext";
 
 const Cart = () => {
   const { state, removeItem, updateQuantity } = useCart();
   const [activeTab, setActiveTab] = useState<"bag" | "favourites">("bag");
+  const navigate = useNavigate();
 
   const cartItems = state.items;
   const subtotal = state.totalPrice;
@@ -152,11 +154,10 @@ const Cart = () => {
               )}
             </div>
 
-            <hr className="my-4 border-gray-300" />
             {/* Order Summary */}
             {cartItems.length > 0 && (
               <div className="lg:col-span-1">
-                <div className=" p-6 sticky top-24">
+                <div className=" p-6 sticky md:w-[290px] top-24">
                   <h2 className="text-lg font-medium mb-6">ORDER SUMMARY</h2>
 
                   <div className="space-y-3 mb-6">
@@ -176,16 +177,16 @@ const Cart = () => {
                   </div>
 
                   <div className="mb-6">
-                    <label className="flex items-start gap-2 text-xs text-gray-600">
-                      <input type="checkbox" className="mt-1" />I agree to the
-                      Terms and Conditions
+                    <label className="flex items-center gap-2 text-xs text-gray-600">
+                      <input type="checkbox" className=" h-[20px] w-[20px]" />I
+                      agree to the Terms and Conditions
                     </label>
                   </div>
 
                   <Button
                     text="CONTINUE"
-                    className="w-full h-[50px] justify-center bg-black text-white py-3 text-center text-xl font-medium tracking-wider transition-colors"
-                    onClick={() => console.log("Proceed to checkout")}
+                    className="w-full h-[50px] justify-center  text-black py-3 text-center text-xl font-medium tracking-wider transition-colors"
+                    onClick={() => navigate("/checkout")}
                   />
                 </div>
               </div>

@@ -14,7 +14,7 @@ const Button = ({ text, rightIcon, leftIcon, className, onClick }: ButtonProps) 
     <button
       onClick={onClick}
       className={cn(
-        "  bg-[#d4d4d4] h-[40px] hover:shadow-2xl flex items-center p-6 justify-between",
+        "  bg-[#d4d4d4] h-[40px] hover:shadow-sm flex items-center p-6 justify-between",
         className
       )}
     >

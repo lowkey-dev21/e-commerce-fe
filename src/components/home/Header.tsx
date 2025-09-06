@@ -42,7 +42,7 @@ const Header = ({ auth }: { auth: boolean }) => {
 
   return (
     <>
-      <header className="w-full  fixed top-0 left-0 z-50 bg-[#ebebeb]">
+      <header className="w-full   fixed top-0 left-0 z-50 bg-[#ebebeb]">
         <div className="max-w-[1800px] md:px-10 px-6 mx-auto p-3 flex justify-between items-center">
           <nav className={`flex  items-center gap-[2rem] `}>
             {DETAIL_PATHNAME === "product-detail" ||
@@ -157,15 +157,15 @@ const Header = ({ auth }: { auth: boolean }) => {
                         <div className="-2">
                           <Link
                             target="_blank"
-                            to="/login"
+                            to="/auth/signin"
                             className="block px-4 py-2 text-sm text-[#272727] hover:bg-[#ebebeb] transition-colors"
                             onClick={closeDropdown}
                           >
-                            Login
+                            Sign In
                           </Link>
                           <Link
                             target="_blank"
-                            to="/signup"
+                            to="/auth/signup"
                             className="block px-4 py-2 text-sm text-[#272727] hover:bg-[#ebebeb] transition-colors"
                             onClick={closeDropdown}
                           >
@@ -231,7 +231,7 @@ const Header = ({ auth }: { auth: boolean }) => {
               <Link
                 key={nav.link}
                 to={nav.link}
-                className="block py-3 px-4 text-lg font-medium text-gray-800 hover:bg-gray-100 rounded-lg transition-colors"
+                className="block text-center py-3 px-4 text-lg font-medium text-gray-800 hover:bg-gray-100 rounded-lg transition-colors"
                 onClick={closeSidebar}
               >
                 {nav.name}
@@ -263,10 +263,16 @@ const Header = ({ auth }: { auth: boolean }) => {
                 <span>Profile</span>
               </button>
             ) : (
-              <button className="w-full flex items-center justify-center gap-3 py-3 px-4 bg-[#272727] text-white rounded-lg">
-                {SVGS.user}
-                <span>Sign In</span>
-              </button>
+              <>
+                <button className="w-full flex items-center justify-center gap-3 py-3 px-4 bg-[#272727] text-white rounded-lg">
+                  {SVGS.user}
+                  <span>Sign In</span>
+                </button>
+                <button className="w-full flex items-center justify-center gap-3 py-3 px-4 text-black rounded-lg border border-gray-400">
+                
+                  <span>Sign Up</span>
+                </button>
+              </>
             )}
           </div>
         </div>
