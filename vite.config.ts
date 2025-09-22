@@ -9,5 +9,13 @@ export default defineConfig({
     host: true,
     port: 4002,
     strictPort: true,
+    proxy: {
+      "/api": {
+        target: "http://localhost:4030",
+        changeOrigin: true,
+        secure: false,
+        rewrite: path => path.replace(/^\/api/, ""),
+      },
+    },
   },
 });

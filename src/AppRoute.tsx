@@ -1,11 +1,13 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import MainLayout from "./layouts/MainLayout";
 import { Home, Details, Products, Signin, Signup } from "./pages";
+import ConfirmSignin from "./pages/auth/ConfirmSignin";
+import ConfirmSignup from "./pages/auth/ConfirmSignup";
+import Dashboard from "./pages/dashboard/Dashboard";
 import Cart from "./pages/cart/Cart";
 import Checkout from "./pages/checkout/Checkout";
 import Profile from "./pages/profile/Profile";
 import Settings from "./pages/settings/Settings";
-import OAuthCallback from "./components/auth/OAuthCallback";
 import AuthLayout from "./layouts/AuthLayout";
 
 const AppRoute = () => {
@@ -19,13 +21,15 @@ const AppRoute = () => {
           <Route path="cart" element={<Cart />} />
           <Route path="checkout" element={<Checkout />} />
           <Route path="profile" element={<Profile />} />
+          <Route path="dashboard" element={<Dashboard />} />
           <Route path="settings" element={<Settings />} />
         </Route>
         <Route path="/auth" element={<AuthLayout />}>
           <Route path="signin" element={<Signin />} />
+          <Route path="signin/confirm" element={<ConfirmSignin />} />
           <Route path="signup" element={<Signup />} />
-          <Route path="auth/google/callback" element={<OAuthCallback provider="google" />} />
-          <Route path="auth/github/callback" element={<OAuthCallback provider="github" />} />
+          <Route path="signup/confirm" element={<ConfirmSignup />} />
+          {/* OAuth callback routes removed - using email OTP flows only */}
         </Route>
       </Routes>
     </BrowserRouter>
