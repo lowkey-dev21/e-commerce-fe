@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { NAVLINKS, SVGS, type Navlinks } from "../../constants/home";
 import { useCart } from "../../contexts/CartContext";
+import useAuthStore from "../../stores/auth";
 
 const Header = ({ auth }: { auth: boolean }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const { state } = useCart();
+  const { user, refresh } = useAuthStore();
   const location = useLocation();
   const { pathname } = location;
 
@@ -39,6 +41,27 @@ const Header = ({ auth }: { auth: boolean }) => {
   const toggleBack = () => {
     navigate(-1);
   };
+
+  // Compute avatar initial (support firstName or first_name from different payloads)
+  const initial = (
+    (user?.firstName || (user as any)?.first_name || user?.email || "?")
+      .toString()
+      .trim()
+      .charAt(0) || "?"
+  ).toUpperCase();
+
+  // Derive authentication state from store or prop. Some parents pass `auth`,
+  // but prefer using the user from the auth store when available.
+  const isAuthed = Boolean(user) || Boolean(auth);
+
+  useEffect(() => {
+    // On mount, if we don't have a user yet try to refresh using cookie
+    // (refresh endpoint will populate the store and localStorage).
+    if (!user) {
+      refresh().then(r => console.debug("Header: refresh result ->", r));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
@@ -103,9 +126,9 @@ const Header = ({ auth }: { auth: boolean }) => {
               </Link>
 
               {/*Use auth section */}
-              {auth ? (
+              {isAuthed ? (
                 <button className=" rounded-full w-[45px] h-[45px] flex items-center justify-center text-white p-2 bg-[#272727]">
-                  MO
+                  <span className="font-bold">{initial}</span>
                 </button>
               ) : (
                 <button className=" rounded-full w-[45px] h-[45px] flex items-center justify-center text-white p-2 bg-[#272727]">
@@ -134,9 +157,9 @@ const Header = ({ auth }: { auth: boolean }) => {
               </Link>
 
               {/*Use auth section */}
-              {auth ? (
+              {isAuthed ? (
                 <button className=" rounded-full w-[50px] h-[50px] flex items-center justify-center text-white p-2 bg-[#272727]">
-                  MO
+                  <span className="font-bold">{initial}</span>
                 </button>
               ) : (
                 <div className="relative">
@@ -255,10 +278,10 @@ const Header = ({ auth }: { auth: boolean }) => {
               <span>Cart</span>
             </Link>
 
-            {auth ? (
+            {isAuthed ? (
               <button className="w-full flex items-center justify-center gap-3 py-3 px-4 bg-[#272727] text-white rounded-lg">
                 <span className="w-8 h-8 bg-white text-[#272727] rounded-full flex items-center justify-center font-bold">
-                  MO
+                  {initial}
                 </span>
                 <span>Profile</span>
               </button>
@@ -269,7 +292,6 @@ const Header = ({ auth }: { auth: boolean }) => {
                   <span>Sign In</span>
                 </button>
                 <button className="w-full flex items-center justify-center gap-3 py-3 px-4 text-black rounded-lg border border-gray-400">
-                
                   <span>Sign Up</span>
                 </button>
               </>

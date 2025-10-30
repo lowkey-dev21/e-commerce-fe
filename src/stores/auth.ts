@@ -42,12 +42,27 @@ const api = axios.create({
 });
 
 export const useAuthStore = create<AuthState>(set => ({
-  user: null,
+  // hydrate user from localStorage for faster UX across reloads
+  user:
+    typeof window !== "undefined" && localStorage.getItem("auth_user")
+      ? JSON.parse(localStorage.getItem("auth_user") as string)
+      : null,
   loading: false,
   message: null,
   error: null,
 
-  setUser: user => set({ user }),
+  setUser: user => {
+    set({ user });
+    try {
+      if (typeof window !== "undefined") {
+        if (user) localStorage.setItem("auth_user", JSON.stringify(user));
+        else localStorage.removeItem("auth_user");
+      }
+    } catch (e) {
+      // ignore storage errors
+      console.debug("auth store: localStorage setUser error", e);
+    }
+  },
   clearError: () => set({ error: null }),
 
   initiateRegistration: async ({ email, firstName, lastName }) => {
@@ -210,9 +225,28 @@ export const useAuthStore = create<AuthState>(set => ({
 
   refresh: async () => {
     try {
-      await api.post(`/api/auth/refresh`);
-    } catch (err) {
-      // silent
+      const res = await api.post(`/api/auth/refresh`);
+      console.debug("auth.refresh: response", res.data);
+      const payload = res.data?.data ?? res.data;
+      if (payload?.user) {
+        set({ user: payload.user });
+        try {
+          if (typeof window !== "undefined")
+            localStorage.setItem("auth_user", JSON.stringify(payload.user));
+        } catch (e) {
+          console.debug("auth.refresh: localStorage set error", e);
+        }
+      }
+      return payload;
+    } catch (err: any) {
+      console.debug("auth.refresh: error", err?.response ?? err);
+      set({ user: null });
+      try {
+        if (typeof window !== "undefined") localStorage.removeItem("auth_user");
+      } catch (e) {
+        /* ignore */
+      }
+      return null;
     }
   },
 

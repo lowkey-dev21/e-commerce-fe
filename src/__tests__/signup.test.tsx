@@ -26,9 +26,14 @@ describe("Signup page", () => {
   });
 
   it("registers and confirms signup flow", async () => {
-  mockInitiate.mockResolvedValue({ message: "Verification code sent" } as any);
-  const fakeUser = { id: "2", email: "bar@baz.com" };
-  mockConfirm.mockResolvedValueOnce({ user: fakeUser, message: "Signup confirmed" } as any);
+    mockInitiate.mockResolvedValue({
+      message: "Verification code sent",
+    } as any);
+    const fakeUser = { id: "2", email: "bar@baz.com" };
+    mockConfirm.mockResolvedValueOnce({
+      user: fakeUser,
+      message: "Signup confirmed",
+    } as any);
 
     render(
       <MemoryRouter initialEntries={["/auth/signup"]}>
