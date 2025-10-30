@@ -17,16 +17,58 @@ const AppRoute = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<MainLayout />}>
-          <Route index element={<PublicRoute><Home /></PublicRoute>} />
+          <Route
+            index
+            element={
+              <PublicRoute>
+                <Home />
+              </PublicRoute>
+            }
+          />
           <Route path="products" element={<Products />} />
           <Route path="product-detail/:id" element={<Details />} />
           <Route path="cart" element={<Cart />} />
-          <Route path="checkout" element={<ProtectedRoute><Checkout /></ProtectedRoute>} />
-          <Route path="profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
-          <Route path="dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-          <Route path="settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
+          <Route
+            path="checkout"
+            element={
+              <ProtectedRoute>
+                <Checkout />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="profile"
+            element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="dashboard"
+            element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="settings"
+            element={
+              <ProtectedRoute>
+                <Settings />
+              </ProtectedRoute>
+            }
+          />
         </Route>
-        <Route path="/auth" element={<PublicRoute><AuthLayout /></PublicRoute>}>
+        <Route
+          path="/auth"
+          element={
+            <PublicRoute>
+              <AuthLayout />
+            </PublicRoute>
+          }
+        >
           <Route path="signin" element={<Signin />} />
           <Route path="signin/confirm" element={<ConfirmSignin />} />
           <Route path="signup" element={<Signup />} />
