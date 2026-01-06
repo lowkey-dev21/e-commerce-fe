@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { default as Button } from "../../components/ui/Button";
-import Input from "../../components/ui/Input";
-import { SVGS } from "../../constants/home";
 import logo from "../../assets/images/logo.png";
 
 interface UserProfile {
@@ -35,26 +33,26 @@ const Profile = () => {
       city: "New York",
       state: "NY",
       zipCode: "10001",
-      country: "United States"
-    }
+      country: "United States",
+    },
   });
 
   const handleInputChange = (field: string, value: string) => {
-    if (field.includes('.')) {
-      const [parent, child] = field.split('.');
-      if (parent === 'address') {
+    if (field.includes(".")) {
+      const [parent, child] = field.split(".");
+      if (parent === "address") {
         setProfile(prev => ({
           ...prev,
           address: {
             ...prev.address,
-            [child]: value
-          }
+            [child]: value,
+          },
         }));
       }
     } else {
       setProfile(prev => ({
         ...prev,
-        [field]: value
+        [field]: value,
       }));
     }
   };
@@ -76,10 +74,12 @@ const Profile = () => {
       <div className="bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-6 md:px-10 py-6">
           <nav className="text-sm text-gray-600 mb-4">
-            <Link to="/" className="hover:underline">Home</Link> /{" "}
-            <span className="font-medium text-black">Profile</span>
+            <Link to="/" className="hover:underline">
+              Home
+            </Link>{" "}
+            / <span className="font-medium text-black">Profile</span>
           </nav>
-          
+
           {/* Logo */}
           <div className="flex items-center mb-6">
             <img src={logo} alt="logo" className="h-8 w-auto mr-2" />
@@ -87,7 +87,7 @@ const Profile = () => {
               VR
             </span>
           </div>
-          
+
           <div className="flex items-center justify-between">
             <h1 className="text-3xl md:text-4xl font-bold text-[#272727]">
               MY PROFILE
@@ -108,7 +108,8 @@ const Profile = () => {
           <div className="lg:col-span-1">
             <div className="bg-[#f8f8f8] p-6 text-center">
               <div className="w-32 h-32 bg-[#272727] rounded-full mx-auto mb-4 flex items-center justify-center text-white text-3xl font-bold">
-                {profile.firstName.charAt(0)}{profile.lastName.charAt(0)}
+                {profile.firstName.charAt(0)}
+                {profile.lastName.charAt(0)}
               </div>
               <h2 className="text-xl font-bold text-[#272727] mb-2">
                 {profile.firstName} {profile.lastName}
@@ -128,7 +129,9 @@ const Profile = () => {
             <div className="space-y-8">
               {/* Personal Information */}
               <div>
-                <h3 className="text-xl font-bold text-[#272727] mb-6">Personal Information</h3>
+                <h3 className="text-xl font-bold text-[#272727] mb-6">
+                  Personal Information
+                </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-sm font-medium text-[#272727] mb-2">
@@ -138,7 +141,9 @@ const Profile = () => {
                       <input
                         type="text"
                         value={profile.firstName}
-                        onChange={(e) => handleInputChange('firstName', e.target.value)}
+                        onChange={e =>
+                          handleInputChange("firstName", e.target.value)
+                        }
                         className="w-full p-3 bg-[#d4d4d4] border-none outline-none focus:ring-2 focus:ring-[#272727]"
                       />
                     ) : (
@@ -147,7 +152,7 @@ const Profile = () => {
                       </div>
                     )}
                   </div>
-                  
+
                   <div>
                     <label className="block text-sm font-medium text-[#272727] mb-2">
                       Last Name
@@ -156,7 +161,9 @@ const Profile = () => {
                       <input
                         type="text"
                         value={profile.lastName}
-                        onChange={(e) => handleInputChange('lastName', e.target.value)}
+                        onChange={e =>
+                          handleInputChange("lastName", e.target.value)
+                        }
                         className="w-full p-3 bg-[#d4d4d4] border-none outline-none focus:ring-2 focus:ring-[#272727]"
                       />
                     ) : (
@@ -165,7 +172,7 @@ const Profile = () => {
                       </div>
                     )}
                   </div>
-                  
+
                   <div>
                     <label className="block text-sm font-medium text-[#272727] mb-2">
                       Email
@@ -174,7 +181,9 @@ const Profile = () => {
                       <input
                         type="email"
                         value={profile.email}
-                        onChange={(e) => handleInputChange('email', e.target.value)}
+                        onChange={e =>
+                          handleInputChange("email", e.target.value)
+                        }
                         className="w-full p-3 bg-[#d4d4d4] border-none outline-none focus:ring-2 focus:ring-[#272727]"
                       />
                     ) : (
@@ -183,7 +192,7 @@ const Profile = () => {
                       </div>
                     )}
                   </div>
-                  
+
                   <div>
                     <label className="block text-sm font-medium text-[#272727] mb-2">
                       Phone
@@ -192,7 +201,9 @@ const Profile = () => {
                       <input
                         type="tel"
                         value={profile.phone}
-                        onChange={(e) => handleInputChange('phone', e.target.value)}
+                        onChange={e =>
+                          handleInputChange("phone", e.target.value)
+                        }
                         className="w-full p-3 bg-[#d4d4d4] border-none outline-none focus:ring-2 focus:ring-[#272727]"
                       />
                     ) : (
@@ -201,7 +212,7 @@ const Profile = () => {
                       </div>
                     )}
                   </div>
-                  
+
                   <div>
                     <label className="block text-sm font-medium text-[#272727] mb-2">
                       Date of Birth
@@ -210,7 +221,9 @@ const Profile = () => {
                       <input
                         type="date"
                         value={profile.dateOfBirth}
-                        onChange={(e) => handleInputChange('dateOfBirth', e.target.value)}
+                        onChange={e =>
+                          handleInputChange("dateOfBirth", e.target.value)
+                        }
                         className="w-full p-3 bg-[#d4d4d4] border-none outline-none focus:ring-2 focus:ring-[#272727]"
                       />
                     ) : (
@@ -219,7 +232,7 @@ const Profile = () => {
                       </div>
                     )}
                   </div>
-                  
+
                   <div>
                     <label className="block text-sm font-medium text-[#272727] mb-2">
                       Gender
@@ -227,13 +240,17 @@ const Profile = () => {
                     {isEditing ? (
                       <select
                         value={profile.gender}
-                        onChange={(e) => handleInputChange('gender', e.target.value)}
+                        onChange={e =>
+                          handleInputChange("gender", e.target.value)
+                        }
                         className="w-full p-3 bg-[#d4d4d4] border-none outline-none focus:ring-2 focus:ring-[#272727]"
                       >
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
                         <option value="Other">Other</option>
-                        <option value="Prefer not to say">Prefer not to say</option>
+                        <option value="Prefer not to say">
+                          Prefer not to say
+                        </option>
                       </select>
                     ) : (
                       <div className="p-3 bg-[#f8f8f8] text-[#272727]">
@@ -246,7 +263,9 @@ const Profile = () => {
 
               {/* Address Information */}
               <div>
-                <h3 className="text-xl font-bold text-[#272727] mb-6">Address Information</h3>
+                <h3 className="text-xl font-bold text-[#272727] mb-6">
+                  Address Information
+                </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="md:col-span-2">
                     <label className="block text-sm font-medium text-[#272727] mb-2">
@@ -256,7 +275,9 @@ const Profile = () => {
                       <input
                         type="text"
                         value={profile.address.street}
-                        onChange={(e) => handleInputChange('address.street', e.target.value)}
+                        onChange={e =>
+                          handleInputChange("address.street", e.target.value)
+                        }
                         className="w-full p-3 bg-[#d4d4d4] border-none outline-none focus:ring-2 focus:ring-[#272727]"
                       />
                     ) : (
@@ -265,7 +286,7 @@ const Profile = () => {
                       </div>
                     )}
                   </div>
-                  
+
                   <div>
                     <label className="block text-sm font-medium text-[#272727] mb-2">
                       City
@@ -274,7 +295,9 @@ const Profile = () => {
                       <input
                         type="text"
                         value={profile.address.city}
-                        onChange={(e) => handleInputChange('address.city', e.target.value)}
+                        onChange={e =>
+                          handleInputChange("address.city", e.target.value)
+                        }
                         className="w-full p-3 bg-[#d4d4d4] border-none outline-none focus:ring-2 focus:ring-[#272727]"
                       />
                     ) : (
@@ -283,7 +306,7 @@ const Profile = () => {
                       </div>
                     )}
                   </div>
-                  
+
                   <div>
                     <label className="block text-sm font-medium text-[#272727] mb-2">
                       State
@@ -292,7 +315,9 @@ const Profile = () => {
                       <input
                         type="text"
                         value={profile.address.state}
-                        onChange={(e) => handleInputChange('address.state', e.target.value)}
+                        onChange={e =>
+                          handleInputChange("address.state", e.target.value)
+                        }
                         className="w-full p-3 bg-[#d4d4d4] border-none outline-none focus:ring-2 focus:ring-[#272727]"
                       />
                     ) : (
@@ -301,7 +326,7 @@ const Profile = () => {
                       </div>
                     )}
                   </div>
-                  
+
                   <div>
                     <label className="block text-sm font-medium text-[#272727] mb-2">
                       ZIP Code
@@ -310,7 +335,9 @@ const Profile = () => {
                       <input
                         type="text"
                         value={profile.address.zipCode}
-                        onChange={(e) => handleInputChange('address.zipCode', e.target.value)}
+                        onChange={e =>
+                          handleInputChange("address.zipCode", e.target.value)
+                        }
                         className="w-full p-3 bg-[#d4d4d4] border-none outline-none focus:ring-2 focus:ring-[#272727]"
                       />
                     ) : (
@@ -319,7 +346,7 @@ const Profile = () => {
                       </div>
                     )}
                   </div>
-                  
+
                   <div>
                     <label className="block text-sm font-medium text-[#272727] mb-2">
                       Country
@@ -328,7 +355,9 @@ const Profile = () => {
                       <input
                         type="text"
                         value={profile.address.country}
-                        onChange={(e) => handleInputChange('address.country', e.target.value)}
+                        onChange={e =>
+                          handleInputChange("address.country", e.target.value)
+                        }
                         className="w-full p-3 bg-[#d4d4d4] border-none outline-none focus:ring-2 focus:ring-[#272727]"
                       />
                     ) : (

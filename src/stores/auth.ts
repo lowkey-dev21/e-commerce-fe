@@ -28,6 +28,7 @@ type AuthState = {
     otp: string;
   }) => Promise<{ user: User | null; message?: string; error?: string }>;
   refresh: () => Promise<void>;
+  fetchUser: () => Promise<void>;
   logout: () => Promise<void>;
   setUser: (user: User | null) => void;
   clearError: () => void;
@@ -247,6 +248,27 @@ export const useAuthStore = create<AuthState>(set => ({
         /* ignore */
       }
       return null;
+    }
+  },
+
+  fetchUser: async () => {
+    set({ loading: true, error: null });
+    try {
+      const res = await api.get(`/api/auth/me`);
+      const payload = res.data?.data ?? res.data;
+      if (payload?.user) {
+        set({ user: payload.user });
+        if (typeof window !== "undefined") {
+          localStorage.setItem("auth_user", JSON.stringify(payload.user));
+        }
+      }
+    } catch (err: any) {
+      set({ user: null });
+      if (typeof window !== "undefined") {
+        localStorage.removeItem("auth_user");
+      }
+    } finally {
+      set({ loading: false });
     }
   },
 
