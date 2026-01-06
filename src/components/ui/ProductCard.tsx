@@ -34,8 +34,8 @@ export default function ProductCard({
   subtitle,
 }: ProductI) {
   const { addItem } = useCart();
-  const [selectedSize, setSelectedSize] = useState('L');
-  const [selectedColor, setSelectedColor] = useState(color || 'Black');
+  const [selectedSize] = useState("L");
+  const [selectedColor] = useState(color || "Black");
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -43,7 +43,7 @@ export default function ProductCard({
       addItem({
         id,
         name,
-        subtitle: subtitle || type || '',
+        subtitle: subtitle || type || "",
         price,
         image,
         size: selectedSize,
